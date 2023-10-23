@@ -55,7 +55,7 @@ const questions = [
     }
 ];
 
-function generateREADME(answers) {
+function generateReadmeContent(answers) {
     return `# ${answers.project_title}
       
   #### Table of Contents
