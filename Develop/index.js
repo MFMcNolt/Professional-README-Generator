@@ -55,12 +55,64 @@ const questions = [
     }
 ];
 
+function generateREADME(answers) {
+    return `# ${answers.project_title}
+      
+  #### Table of Contents
+  1. [Project Description](#project-description)
+  2. [Installation Instructions](#installation-instructions)
+  3. [Usage Information](#usage-information)
+  4. [Contributor Guidelines](#contributor-guidelines)
+  5. [Code of Conduct](#code-of-conduct)
+  6. [Test Instructions](#test-instructions)
+  7. [License](#license)
+  8. [Questions](#questions)
+  
+  
+  ## Project Description
+  * ${answers.description}
+  
+  ## Installation Instructions
+  * ${answers.install}
+  
+  ## Usage Information
+  * ${answers.use}
+  
+  ## Contributor Guidelines
+  * ${answers.contributions}
+  
+  ## Code of Conduct
+  * [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/code_of_conduct.md)
+  
+  ## Test Instructions
+  * ${answers.test}
+  
+  ## License
+  * licensed under the ${answers.license}
+  
+  ## Questions
+  * For additional help or questions about collaboration, please reach out to ${answers.email}
+  
+  * Follow me on Github at [${answers.github}](http://github.com/${answers.github})`;
+    
+  }
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) { }
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, (err) => {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("Successfully created" + fileName);
+    });
+}
 
 // TODO: Create a function to initialize app
-function init() { }
-
+function init() {
+    inquirer.prompt(questions).then((answers) => {
+        const readmeContent = generateReadmeContent(answers);
+        writeToFile("README.md", readmeContent);
+    });
+}
 // Function call to initialize app
 init();
